@@ -1,2 +1,2 @@
 # GeneralTemplates
-Genaral templates for solving different tasks
+Genaral templates for solving different tasks.
