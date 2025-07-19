@@ -43,6 +43,7 @@ namespace GrapghQL_Altair_CoreWebApp.Data.Repositories
         {
             if (course is not null)
             {
+                course.Id = _repository.Count + 1;
                 course.DateCreated = DateTime.Now;
                 course.DateUpdated = DateTime.Now;
                 _repository.Add(course);

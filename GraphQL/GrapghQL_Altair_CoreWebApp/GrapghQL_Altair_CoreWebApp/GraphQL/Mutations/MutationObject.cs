@@ -4,7 +4,7 @@ using GraphQL.Types;
 using GrapghQL_Altair_CoreWebApp.Data.Repositories;
 using GrapghQL_Altair_CoreWebApp.GraphQL.Types;
 
-namespace GrapghQL_Altair_CoreWebApp.GraphQL
+namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
 {
     public class MutationObject : ObjectGraphType<object>
     {

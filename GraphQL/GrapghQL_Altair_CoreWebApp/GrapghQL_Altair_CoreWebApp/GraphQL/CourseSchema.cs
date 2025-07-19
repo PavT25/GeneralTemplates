@@ -1,4 +1,4 @@
-﻿using GraphQL.Types;
+﻿using GrapghQL_Altair_CoreWebApp.GraphQL.Mutations;
 using GrapghQL_Altair_CoreWebApp.GraphQL.Queries;
 using Schema = GraphQL.Types.Schema;
 

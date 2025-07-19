@@ -44,7 +44,7 @@ namespace GrapghQL_Altair_CoreWebApp
 
             app.UseAuthorization();
 
-
+            // https://medium.com/@ozgurtaylann/exploring-graphql-with-asp-net-core-a-practical-guide-to-efficient-api-design-fc5caac9da53
             // http://localhost:port/ui/altair
             // Register GraphQL middleware and Altair UI
             app.UseGraphQL();
