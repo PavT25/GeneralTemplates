@@ -8,6 +8,7 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Types
         {
             Name = "Course";
             Description = "A course object";
+
             Field(x => x.Id, type: typeof(IdGraphType)).Description("The ID of the course.");
             Field(x => x.Name, type: typeof(StringGraphType)).Description("The name of the course.");
             Field(x => x.Description, type: typeof(StringGraphType)).Description("The description of the course.");

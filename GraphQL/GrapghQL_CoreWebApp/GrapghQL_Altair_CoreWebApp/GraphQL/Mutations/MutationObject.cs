@@ -19,14 +19,13 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
                 Description = "Add a new course",
                 Type = typeof(CourseType),
                 Arguments = new QueryArguments(
-                    new QueryArgument<CourseInputType> { Name = "course" }
+                    new QueryArgument<NonNullGraphType<CourseInputType>> { Name = "course", Description = "Course input parameter"}
                 ),
                 Resolver = new FuncFieldResolver<object>(context =>
                 {
                     var courseInput = context.GetArgument<Data.Models.Course>("course");
                     return repository.AddCourse(courseInput);
                 })
-
             });
 
             AddField(new FieldType
@@ -35,8 +34,8 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
                 Description = "Update an existing course",
                 Type = typeof(CourseType),
                 Arguments = new QueryArguments(
-                    new QueryArgument<IdGraphType> { Name = "id" },
-                    new QueryArgument<NonNullGraphType<CourseInputType>> { Name = "course" }
+                    new QueryArgument<IdGraphType> { Name = "id", Description = "Id of the course to be updated"},
+                    new QueryArgument<NonNullGraphType<CourseInputType>> { Name = "course", Description = "Updated course values"}
                 ),
                 Resolver = new FuncFieldResolver<object>(context =>
                 {
@@ -52,7 +51,7 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
                 Description = "Delete a course by ID",
                 Type = typeof(BooleanGraphType),
                 Arguments = new QueryArguments(
-                    new QueryArgument<IdGraphType> { Name = "id" }
+                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "id", Description = "Id of the course to be deleted"}
                 ),
                 Resolver = new FuncFieldResolver<object>(context =>
                 {
