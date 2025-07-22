@@ -19,6 +19,7 @@ namespace GrapghQL_Altair_CoreWebApp
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddSingleton<IReviewRepository, ReviewRepository>();
             builder.Services.AddSingleton<ICoursesRepository, CoursesRepository>();
 
             builder.Services

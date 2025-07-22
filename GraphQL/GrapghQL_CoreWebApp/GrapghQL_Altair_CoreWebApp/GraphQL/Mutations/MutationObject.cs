@@ -1,8 +1,9 @@
-﻿using GraphQL;
-using GraphQL.Resolvers;
-using GraphQL.Types;
+﻿using GrapghQL_Altair_CoreWebApp.Data.Models;
 using GrapghQL_Altair_CoreWebApp.Data.Repositories;
 using GrapghQL_Altair_CoreWebApp.GraphQL.Types;
+using GraphQL;
+using GraphQL.Resolvers;
+using GraphQL.Types;
 
 namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
 {
@@ -23,7 +24,7 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
                 ),
                 Resolver = new FuncFieldResolver<object>(context =>
                 {
-                    var courseInput = context.GetArgument<Data.Models.Course>("course");
+                    var courseInput = context.GetArgument<Course>("course");
                     return repository.AddCourse(courseInput);
                 })
             });
@@ -40,7 +41,7 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
                 Resolver = new FuncFieldResolver<object>(context =>
                 {
                     var id = context.GetArgument<int>("id");
-                    var courseInput = context.GetArgument<Data.Models.Course>("course");
+                    var courseInput = context.GetArgument<Course>("course");
                     return repository.UpdateCourse(id, courseInput);
                 })
             });
