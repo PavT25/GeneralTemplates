@@ -12,7 +12,8 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Types
 
             Field<StringGraphType>("Name");
             Field<StringGraphType>("Description");
-            Field<IntGraphType>("Review");
+
+            Field<ListGraphType<ReviewInputType>>("Reviews");
         }
     }
 }

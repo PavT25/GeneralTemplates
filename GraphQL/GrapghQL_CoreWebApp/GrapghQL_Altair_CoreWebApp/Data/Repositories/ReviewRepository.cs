@@ -66,16 +66,19 @@ namespace GrapghQL_Altair_CoreWebApp.Data.Repositories
             return _reviewsRepository.Where(c => c.CourseId == courseId).ToList();
         }
 
-        public bool AddReview(Review? review)
+        public Review AddReview(Review review)
         {
-            if (review is null) return false;
+            if (review is not null)
+            {
+                review.Id = _reviewsRepository.Count + 1;
+                _reviewsRepository.Add(review);
+                return review;
+            }
 
-            review.Id = _reviewsRepository.Count + 1;
-            _reviewsRepository.Add(review);
-            return true;
+            return review;
         }
 
-        public bool UpdateReview(int reviewId, Review? review)
+        public Review UpdateReview(int reviewId, Review review)
         {
             Review? updateReview = _reviewsRepository.Find(c => c.Id == reviewId);
             if (updateReview is not null && review is not null)
@@ -83,10 +86,10 @@ namespace GrapghQL_Altair_CoreWebApp.Data.Repositories
                 updateReview.Rating = review.Rating;
                 updateReview.Comment = review.Comment;
                 updateReview.CourseId = review.CourseId;
-                return true;
+                return updateReview;
             }
 
-            return false;
+            return updateReview;
         }
 
         public bool DeleteReview(int reviewId)

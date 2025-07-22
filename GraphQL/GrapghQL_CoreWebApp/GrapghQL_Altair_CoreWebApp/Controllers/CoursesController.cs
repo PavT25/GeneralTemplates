@@ -41,11 +41,12 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
         [HttpPost(Name = "AddCourse")]
         public IActionResult AddCourse([FromBody] Course course)
         {
-            bool courseAdded = _courseRepository.AddCourse(course);
+            var courseAdded = _courseRepository.AddCourse(course);
 
-            if (courseAdded)
+            if (courseAdded is not null)
             {
-                return (CreatedResult)Created("Add course. The course was created", course);
+                // return (CreatedResult)Created("Add course. The course was created", course);
+                return Ok(course);
             }
             return BadRequest("Add course. The course could not be added.");
         }
@@ -60,12 +61,12 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
             }
 
             review.CourseId = courseId;
-            bool reviewAdded = _reviewRepository.AddReview(review);
+            _reviewRepository.AddReview(review);
             bool courseUpdated = _courseRepository.UpdateReviewsOfTheCourse(courseId);
 
-            if (reviewAdded && courseUpdated)
+            if (courseUpdated)
             {
-                return (CreatedResult)Created("Add review. The review was added.", courseId);
+                return (CreatedResult)Created("Add review. The review was added.", review);
             }
             return BadRequest($"Add review. The review could not be added to the course with ID {courseId}.");
         }
@@ -79,9 +80,9 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
                 return NotFound($"Update course. Course with ID {id} does not exist.");
             }
 
-            bool courseUpdated = _courseRepository.UpdateCourse(id, course);
+            var courseUpdated = _courseRepository.UpdateCourse(id, course);
 
-            if (courseUpdated)
+            if (courseUpdated is not null)
             {
                 return Ok(courseUpdated);
             }
@@ -108,9 +109,9 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
             }
 
             review.CourseId = courseId;
-            bool reviewUpdated = _reviewRepository.UpdateReview(reviewId, review);
+            var reviewUpdated = _reviewRepository.UpdateReview(reviewId, review);
 
-            if (reviewUpdated)
+            if (reviewUpdated is not null)
             {
                 return Ok(reviewUpdated);
             }

@@ -13,7 +13,6 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Types
             Field(x => x.Id, type: typeof(IdGraphType)).Description("The ID of the review.");
             Field(x => x.Rating, type: typeof(IntGraphType)).Description("The rating of the review.");
             Field(x => x.Comment, type: typeof(StringGraphType)).Description("The comment of the review.");
-            // Field(x => x.CourseId, type: typeof(IntGraphType)).Description("The course id.");
         }
     }
 }

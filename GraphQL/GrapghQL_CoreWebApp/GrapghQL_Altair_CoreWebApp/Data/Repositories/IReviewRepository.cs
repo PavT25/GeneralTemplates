@@ -1,4 +1,5 @@
 ﻿using GrapghQL_Altair_CoreWebApp.Data.Models;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace GrapghQL_Altair_CoreWebApp.Data.Repositories
 {
@@ -8,8 +9,8 @@ namespace GrapghQL_Altair_CoreWebApp.Data.Repositories
         bool IsReviewExists(int reviewId);
         Review GetReviewById(int reviewId);
         List<Review> GetReviewsOfTheCourse(int courseId);
-        bool AddReview(Review? review);
-        bool UpdateReview(int reviewId, Review? review);
+        Review AddReview(Review review);
+        Review UpdateReview(int reviewId, Review review);
         bool DeleteReview(int reviewId);
     }
 }

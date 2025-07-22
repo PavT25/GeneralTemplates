@@ -9,7 +9,7 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
 {
     public class MutationObject : ObjectGraphType<object>
     {
-        public MutationObject(ICoursesRepository repository)
+        public MutationObject(ICoursesRepository courseRepository, IReviewRepository reviewRepository)
         {
             Name = "Mutation";
             Description = "Mutation operations for courses";
@@ -25,7 +25,7 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
                 Resolver = new FuncFieldResolver<object>(context =>
                 {
                     var courseInput = context.GetArgument<Course>("course");
-                    return repository.AddCourse(courseInput);
+                    return courseRepository.AddCourse(courseInput);
                 })
             });
 
@@ -42,7 +42,7 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
                 {
                     var id = context.GetArgument<int>("id");
                     var courseInput = context.GetArgument<Course>("course");
-                    return repository.UpdateCourse(id, courseInput);
+                    return courseRepository.UpdateCourse(id, courseInput);
                 })
             });
 
@@ -57,7 +57,55 @@ namespace GrapghQL_Altair_CoreWebApp.GraphQL.Mutations
                 Resolver = new FuncFieldResolver<object>(context =>
                 {
                     var id = context.GetArgument<int>("id");
-                    repository.DeleteCourse(id);
+                    courseRepository.DeleteCourse(id);
+                    return true; // Return true to indicate successful deletion
+                })
+            });
+
+            AddField(new FieldType
+            {
+                Name = "addReview",
+                Description = "Add a review to a course",
+                Type = typeof(ReviewType),
+                Arguments = new QueryArguments(
+                    new QueryArgument<NonNullGraphType<ReviewInputType>> { Name = "review", Description = "Review input parameter" }
+                ),
+                Resolver = new FuncFieldResolver<object>(context =>
+                {
+                    var review = context.GetArgument<Review>("review");
+                    return reviewRepository.AddReview(review);
+                })
+            });
+
+            AddField(new FieldType
+            {
+                Name = "updateReview",
+                Description = "Update an existing review",
+                Type = typeof(ReviewType),
+                Arguments = new QueryArguments(
+                     new QueryArgument<IdGraphType> { Name = "reviewId", Description = "Id of the review to be updated" },
+                    new QueryArgument<NonNullGraphType<ReviewInputType>> { Name = "review", Description = "Updated review values" }
+                ),
+                Resolver = new FuncFieldResolver<object>(context =>
+                {
+                    var id = context.GetArgument<int>("reviewId");
+                    var reviewInput = context.GetArgument<Review>("review");
+                    return reviewRepository.UpdateReview(id, reviewInput);
+                })
+            });
+
+            AddField(new FieldType
+            {
+                Name = "deleteReview",
+                Description = "Delete a review by ID",
+                Type = typeof(BooleanGraphType),
+                Arguments = new QueryArguments(
+                    new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "reviewId", Description = "Id of the review to be deleted" }
+                ),
+                Resolver = new FuncFieldResolver<object>(context =>
+                {
+                    var id = context.GetArgument<int>("reviewId");
+                    reviewRepository.DeleteReview(id);
                     return true; // Return true to indicate successful deletion
                 })
             });

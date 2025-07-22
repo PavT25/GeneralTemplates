@@ -53,18 +53,39 @@ namespace GrapghQL_Altair_CoreWebApp.Data.Repositories
             return _coursesRepository.Find(c => c.Id == courseId);
         }
 
-        public bool AddCourse(Course course)
+        public Course AddCourse(Course course)
         {
             if (course is not null)
             {
-                course.Id = _coursesRepository.Count + 1;
-                course.DateCreated = DateTime.Now;
-                course.DateUpdated = DateTime.Now;
-                _coursesRepository.Add(course);
-                return true;
+                Course newCourse = new Course
+                {
+                    Id = _coursesRepository.Count + 1,
+                    Name = course.Name,
+                    Description = course.Description,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                    Reviews = course.Reviews ?? new List<Review>(),
+                };
+                _coursesRepository.Add(newCourse);
+
+                if (course.Reviews is not null)
+                {
+                    foreach (Review review in course.Reviews)
+                    {
+                        Review newReview = new Review
+                        {
+                            Id = _reviewsRepository.GetAllReviews().Count + 1,
+                            Rating = review.Rating,
+                            Comment = review.Comment,
+                            CourseId = newCourse.Id
+                        };
+                        _reviewsRepository.AddReview(newReview);
+                    }
+                }
+                return newCourse;
             }
 
-            return false;
+            return course;
         }
 
         public bool IsReviewOfTheCourseExists(int courseId, int reviewId)
@@ -77,7 +98,7 @@ namespace GrapghQL_Altair_CoreWebApp.Data.Repositories
             return false;
         }
 
-        public bool UpdateCourse(int courseId, Course course)
+        public Course UpdateCourse(int courseId, Course course)
         {
             var _course = _coursesRepository.Find(c => c.Id == courseId);
             if (_course is not null)
@@ -91,10 +112,9 @@ namespace GrapghQL_Altair_CoreWebApp.Data.Repositories
                 {
                     _course.Reviews = course.Reviews;
                 }
-                return true;
             }
 
-            return false;
+            return _course;
         }
 
         public bool UpdateReviewsOfTheCourse(int courseId)
