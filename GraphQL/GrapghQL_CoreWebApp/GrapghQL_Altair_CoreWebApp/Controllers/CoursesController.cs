@@ -28,7 +28,6 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
         [HttpGet("{id}")]
         public IActionResult GetCourseById(int id)
         {
-            // Check if the course exists
             if (!_courseRepository.IsCourseExists(id))
             {
                 return NotFound($"Get course by ID. Course with ID {id} does not exist.");
@@ -45,7 +44,6 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
 
             if (courseAdded is not null)
             {
-                // return (CreatedResult)Created("Add course. The course was created", course);
                 return Ok(course);
             }
             return BadRequest("Add course. The course could not be added.");
@@ -54,7 +52,6 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
         [HttpPost("{courseId}/reviews", Name = "AddReview")]
         public IActionResult AddReview(int courseId, [FromBody] Review review)
         {
-            // Check if the course exists
             if (!_courseRepository.IsCourseExists(courseId))
             {
                 return NotFound($"Add review. Course with ID {courseId} does not exist.");
@@ -74,7 +71,6 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
         [HttpPut]
         public IActionResult Update(int id, [FromBody] Course course)
         {
-            // Check if the course exists
             if (!_courseRepository.IsCourseExists(id))
             {
                 return NotFound($"Update course. Course with ID {id} does not exist.");
@@ -92,17 +88,14 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
         [HttpPut("{courseId}/reviews/{reviewId}")]
         public IActionResult UpdateReview(int courseId, int reviewId, [FromBody] Review review)
         {
-            // Check if the course exists
             if (!_courseRepository.IsCourseExists(courseId))
             {
                 return NotFound($"Update review. Update review. Course with ID {courseId} does not exist.");
             }
-            // Check if the review exists
             if (!_reviewRepository.IsReviewExists(reviewId))
             {
                 return NotFound($"Update review. Review with ID {reviewId} does not exist.");
             }
-            // Check if the review belongs to the course
             if (!_courseRepository.IsReviewOfTheCourseExists(courseId, reviewId))
             {
                 return BadRequest($"Update review. Review with ID {reviewId} does not belong to course with ID {courseId}.");
@@ -121,13 +114,11 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            // Check if the course exists
             if (!_courseRepository.IsCourseExists(id))
             {
                 return NotFound($"Delete course. Course with ID {id} does not exist.");
             }
 
-            // Proceed to delete the course
             bool courseDeleted = _courseRepository.DeleteCourse(id);
 
             if (courseDeleted)
@@ -140,19 +131,16 @@ namespace GrapghQL_Altair_CoreWebApp.Controllers
         [HttpDelete("{courseId}/reviews/{reviewId}")]
         public IActionResult DeleteReview(int courseId, int reviewId)
         {
-            // Check if the course exists
             if (!_courseRepository.IsCourseExists(courseId))
             {
                 return NotFound($"Delete review. Course with ID {courseId} does not exist.");
             }
 
-            // Check if the review exists
             if (!_reviewRepository.IsReviewExists(reviewId))
             {
                 return NotFound($"Delete review. Review with ID {reviewId} does not exist.");
             }
 
-            // Check if the review belongs to the course
             if (!_courseRepository.IsReviewOfTheCourseExists(courseId, reviewId))
             {
                 return BadRequest($"Delete review. Review with ID {reviewId} does not belong to course with ID {courseId}.");
