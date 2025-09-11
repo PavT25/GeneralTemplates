@@ -25,4 +25,8 @@ foreach (var person in persons)
     Console.WriteLine($"Id: {person.Id}, Name: {person.Name}");
 }
 
+Console.WriteLine("--- ---");
+
+Console.WriteLine(students.MyContains(student => student.Name.Equals("Alice")));
+
 Console.WriteLine("--- End ---");

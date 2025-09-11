@@ -20,5 +20,17 @@
                 yield return selector.Invoke(element);
             }
         }
+
+        public static bool MyContains<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            foreach (var element in source)
+            {
+                if (predicate.Invoke(element))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
