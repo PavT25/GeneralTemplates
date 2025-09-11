@@ -32,5 +32,30 @@
             }
             return false;
         }
+
+        public static bool MyAll<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            foreach (var element in source)
+            {
+                if (!predicate.Invoke(element))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool MyAny<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            foreach (var element in source)
+            {
+                if (predicate.Invoke(element))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

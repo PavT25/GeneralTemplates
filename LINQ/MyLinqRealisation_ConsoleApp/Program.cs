@@ -17,7 +17,7 @@ foreach (var student in filteredStudents)
     Console.WriteLine($"Id: {student.Id}, Name: {student.Name}, Age: {student.Age}");
 }
 
-Console.WriteLine("--- ---");
+Console.WriteLine("--- Select ---");
 
 var persons = students.MySelect(student => new Person { Id = student.Id, Name = student.Name });
 foreach (var person in persons)
@@ -25,8 +25,17 @@ foreach (var person in persons)
     Console.WriteLine($"Id: {person.Id}, Name: {person.Name}");
 }
 
-Console.WriteLine("--- ---");
+Console.WriteLine("--- Contains ---");
 
 Console.WriteLine(students.MyContains(student => student.Name.Equals("Alice")));
+
+Console.WriteLine("--- All ---");
+
+Console.WriteLine(students.MyAll(student => student.Name.Equals("Alice")));
+Console.WriteLine(students.MyAll(student => student.Age > 17));
+
+Console.WriteLine("--- Any ---");
+
+Console.WriteLine(students.MyAny(student => student.Name.Equals("Alice")));
 
 Console.WriteLine("--- End ---");
