@@ -1,4 +1,4 @@
-﻿namespace MyLinqRealisation_ConsoleApp
+﻿namespace MyLinqRealisation_ConsoleApp.Functions
 {
     public static class Enumerable
     {

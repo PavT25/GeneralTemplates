@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyLinqRealisation_ConsoleApp
+namespace MyLinqRealisation_ConsoleApp.Data
 {
     internal class Person
     {

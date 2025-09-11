@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using MyLinqRealisation_ConsoleApp;
+using MyLinqRealisation_ConsoleApp.Data;
+using MyLinqRealisation_ConsoleApp.Functions;
 
 Console.WriteLine("--- Hello, World! ---");
 
