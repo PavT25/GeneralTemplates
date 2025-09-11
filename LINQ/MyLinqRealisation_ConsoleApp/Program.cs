@@ -11,10 +11,17 @@ List<Student> students = new List<Student>
 };
 
 var filteredStudents = students.MyWhere(student => student.Age > 18).MyWhere(student => student.Name.Equals("Bob"));
-
 foreach (var student in filteredStudents)
 {
     Console.WriteLine($"Id: {student.Id}, Name: {student.Name}, Age: {student.Age}");
+}
+
+Console.WriteLine("--- ---");
+
+var persons = students.MySelect(student => new Person { Id = student.Id, Name = student.Name });
+foreach (var person in persons)
+{
+    Console.WriteLine($"Id: {person.Id}, Name: {person.Name}");
 }
 
 Console.WriteLine("--- End ---");

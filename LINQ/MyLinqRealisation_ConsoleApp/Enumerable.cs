@@ -13,5 +13,12 @@
             }
         }
 
+        public static IEnumerable<TResult> MySelect<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        {
+            foreach (var element in source)
+            {
+                yield return selector.Invoke(element);
+            }
+        }
     }
 }
