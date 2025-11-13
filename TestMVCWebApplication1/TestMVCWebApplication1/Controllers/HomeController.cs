@@ -36,6 +36,20 @@ namespace TestMVCWebApplication1.Controllers
             return Json(new { date = DateTime.Now.ToLongDateString(), time = DateTime.Now.ToLongTimeString(), Data = inputData }, "application/json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult TestAction3(string strData, int intData)
+        {
+            var result = new
+            {
+                Date = DateTime.Now.ToLongDateString(),
+                Time = DateTime.Now.ToLongTimeString(),
+                Input = new { StringData = strData, IntData = intData },
+                Active = true
+            };
+
+            return Json(result, "application/json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
+        }
+
 
 
 

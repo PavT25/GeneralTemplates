@@ -5,6 +5,9 @@ $(document).ready(function () {
         console.log("testButton was clicked.");
 
         const inputString = $("#inputData").val();
+
+        //const integerData = parseInt($("#integerData").val());
+        const integerData = 777;
         //alert("Input data: " + inputString);
 
 
@@ -55,6 +58,32 @@ $(document).ready(function () {
                 console.log(data);
             },
         });
+
+        $.ajax({
+            type: "GET",
+            url: "Home/TestAction3/",
+            contentType: 'application/json; charset=utf-8',
+            data: { strData: inputString, intData: integerData },
+            cashe: false,
+            datatype: "text",
+            success: function (data) {
+                console.log('Submission was successful.');
+                console.log(data);
+
+                varresultString = "Result: \n";
+                varresultString += "DateTime: " + data.Date + " " + data.Time + ";\nInput: " + data.Input.StringData + ", " + data.Input.IntData + "\n";
+
+                var outputArea = $("#outputArea");
+                outputArea.val(outputArea.val() + varresultString);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+
+
+
     });
 
 
