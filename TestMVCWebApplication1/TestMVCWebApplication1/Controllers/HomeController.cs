@@ -27,13 +27,27 @@ namespace TestMVCWebApplication1.Controllers
         [HttpGet]
         public JsonResult TestAction()
         {
-            return Json(new { date = DateTime.Now.ToLongDateString(),  time = DateTime.Now.ToLongTimeString(), Data = "AAAA" }, "application/json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
+            var result = new
+            {
+                Date = DateTime.Now.ToLongDateString(),
+                Time = DateTime.Now.ToLongTimeString(),
+                Data = "AAAA"
+            };
+
+            return Json(result, "application/json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult TestAction2(string inputData)
         {
-            return Json(new { date = DateTime.Now.ToLongDateString(), time = DateTime.Now.ToLongTimeString(), Data = inputData }, "application/json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
+            var result = new
+            {
+                Date = DateTime.Now.ToLongDateString(),
+                Time = DateTime.Now.ToLongTimeString(),
+                Data = inputData
+            };
+
+            return Json(result, "application/json", System.Text.Encoding.UTF8, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
